@@ -11,8 +11,9 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $laporans = Laporan::with(['anggota', 'kader'])->get();
-        return view('laporans.index', compact('laporans'));
+       $this->authorize('viewLaporan', Laporan::class);
+    $laporans = Laporan::with(['anggota', 'kader'])->get();
+    return view('laporans.index', compact('laporans'));
     }
 
     public function create()

@@ -11,13 +11,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // // Membuat 10 data Kader
-        Kader::factory()->count(5)->create();
+        // // Membuat 3 data Kader
+        Kader::factory()->count(3)->create();
 
-        // Membuat 20 data Anggota
-        Anggota::factory()->count(20)->create();
+        // Membuat 10 data Anggota
+        Anggota::factory()->count(10)->create();
 
-        // // Membuat 50 data Laporan
+        // // Membuat 20 data Laporan
         Laporan::factory()->count(10)->create();
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -30,7 +30,7 @@
         .btn-primary:hover {
             background-color: #23272b;
         }
-        .register-link {
+        .login-link {
             text-align: center;
             margin-top: 10px;
         }
@@ -39,7 +39,7 @@
 <body>
     <div class="card">
         <div class="card-header">
-            Login
+            Register
         </div>
         <div class="card-body">
             @if (session('error'))
@@ -48,13 +48,30 @@
                 </div>
             @endif
 
-            <!-- Form Login -->
-            <form method="POST" action="{{ route('login') }}">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Form Register -->
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
+                <!-- Name Input -->
+                <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan Nama" required autofocus>
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
                 <!-- Email Input -->
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukkan Email" required autofocus>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukkan Email" required>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -73,13 +90,19 @@
                     @enderror
                 </div>
 
+                <!-- Confirm Password Input -->
+                <div class="form-group">
+                    <label for="password_confirmation">Konfirmasi Password</label>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Ulangi Password" required>
+                </div>
+
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
 
-            <!-- Link ke Halaman Register -->
-            <div class="register-link">
-                <p>Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
+            <!-- Link ke Halaman Login -->
+            <div class="login-link">
+                <p>Sudah punya akun? <a href="{{ route('login') }}">Login di sini</a></p>
             </div>
         </div>
     </div>

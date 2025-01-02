@@ -21,10 +21,10 @@
             @foreach($laporans as $laporan)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $laporan->anggota->nik }}</td>
-                    <td>{{ $laporan->anggota->nama }}</td>
-                    <td>{{ $laporan->anggota->alamat }}</td>
-                    <td>{{ $laporan->kader->nama }}</td>
+                    <td>{!! $laporan->anggota?->nik !!}</td>
+                    <td>{!! $laporan->anggota?->nama !!}</td>
+                    <td>{!! $laporan->anggota?->alamat !!}</td>
+                    <td>{!! $laporan->kader?->nama !!}</td>
                     <td>{{ $laporan->tanggal }}</td>
                 </tr>
             @endforeach

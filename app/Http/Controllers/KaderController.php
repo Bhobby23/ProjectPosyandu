@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 class KaderController extends Controller
 {
     public function index()
-    {
-        $kaders = Kader::all();
-        return view('kaders.index', compact('kaders'));
-    }
+{
+    $this->authorize('viewKader', Kader::class);
+    $kaders = Kader::all();
+    return view('kaders.index', compact('kaders'));
+}
+
 
     public function create()
     {
