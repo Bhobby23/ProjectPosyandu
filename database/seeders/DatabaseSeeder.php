@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         Anggota::factory()->count(10)->create();
 
         // // Membuat 20 data Laporan
-        Laporan::factory()->count(10)->create();
+        Laporan::factory()->count(20)->create();
     }
 }

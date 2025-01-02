@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Laporan;
 use App\Models\Anggota;
 use Illuminate\Http\Request;
 
@@ -31,12 +31,8 @@ public function create()
             'alamat' => 'required|string|max:255',
         ]);
 
-        // Simpan anggota baru
-        Anggota::create([
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-        ]);
+       // Buat Anggota baru
+       $anggota = Anggota::create($request->all());
 
         // Redirect setelah berhasil menyimpan
         return redirect()->route('anggotas.index')->with('success', 'Anggota berhasil ditambahkan.');
@@ -50,23 +46,24 @@ public function edit(Anggota $anggota)
 }
 
 public function update(Request $request, Anggota $anggota)
-{
-    // Hanya kader yang bisa memperbarui anggota
-    $this->authorize('update', $anggota);
+    {
+        // Hanya kader yang bisa memperbarui anggota
+        $this->authorize('update', $anggota);
 
-    // Validasi data
-    $request->validate([
-        'nik' => 'required|max:16|unique:anggotas,nik,' . $anggota->nik . ',nik', // Perbaikan di sini
-        'nama' => 'required|string|max:255',
-        'alamat' => 'nullable|string|max:255',
-    ]);
+        // Validasi data
+        $request->validate([
+            'nik' => 'required|max:16|unique:anggotas,nik,' . $anggota->nik . ',nik',
+            'nama' => 'required|string|max:255',
+            'alamat' => 'nullable|string|max:255',
+        ]);
 
-    // Perbarui anggota
-    $anggota->update($request->all());
+        // Perbarui anggota
+        $anggota->update($request->all());
+        
 
-    // Redirect setelah berhasil memperbarui
-    return redirect()->route('anggotas.index')->with('success', 'Anggota berhasil diupdate.');
-}
+        // Redirect setelah berhasil memperbarui
+        return redirect()->route('anggotas.index')->with('success', 'Anggota berhasil diupdate.');
+    }
 
     // Menghapus anggota
     public function destroy(Anggota $anggota)

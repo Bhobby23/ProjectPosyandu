@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 
-// Rute untuk memproses registrasi
+// Rute untuk registrasi
 Route::post('/register', [AuthController::class, 'register']);
 // Rute untuk logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -42,7 +42,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute untuk halaman home setelah login
 Route::get('/home', function () {
-    return view('home'); // Ganti dengan view yang sesuai
+    return view('home'); 
 })->middleware('auth');
 
 route::get('/', function(){
